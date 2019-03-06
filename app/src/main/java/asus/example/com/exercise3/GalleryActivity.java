@@ -23,13 +23,11 @@ public class GalleryActivity extends AppCompatActivity {
         previewImages.addItemDecoration(new SpacesItemDecoration(4));
         previewImages.setLayoutManager(new GridLayoutManager(this, getResources().getInteger(R.integer.rows)));
 
-
-
         RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(actors, this);
         recyclerViewAdapter.setOnItemClickListener(new RecyclerViewAdapter.OnItemClickListener<Actor>() {
             @Override
             public void onItemClicked(int position, Actor item) {
-                Intent intent = new Intent(GalleryActivity.this, ActorDetailActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ActorDetailActivity.class);
                 intent.putExtra("position", position);
                 startActivity(intent);
             }
