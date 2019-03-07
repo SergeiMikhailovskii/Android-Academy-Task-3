@@ -13,8 +13,6 @@ import java.util.List;
 public class GalleryActivity extends AppCompatActivity {
 
     private final List<Actor> actors = DataUtil.generateActors();
-    private final String INTENT_IMAGE_URI = "IMAGE_URI";
-    private final String INTENT_DESCRIPTION = "DESCRIPTION";
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -30,13 +28,12 @@ public class GalleryActivity extends AppCompatActivity {
             @Override
             public void onItemClicked(int position, Actor item) {
                 Intent intent = new Intent(getApplicationContext(), ActorDetailActivity.class);
-                intent.putExtra(INTENT_IMAGE_URI, actors.get(position).getLargeImage());
-                intent.putExtra(INTENT_DESCRIPTION, actors.get(position).getDescription());
+                intent.putExtra(ActorDetailActivity.INTENT_IMAGE_URI, actors.get(position).getLargeImage());
+                intent.putExtra(ActorDetailActivity.INTENT_DESCRIPTION, actors.get(position).getDescription());
                 startActivity(intent);
             }
         });
         previewImages.setAdapter(recyclerViewAdapter);
-
 
     }
 

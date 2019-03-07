@@ -10,14 +10,13 @@ import com.bumptech.glide.Glide;
 
 
 public class ActorDetailActivity extends AppCompatActivity {
+    public static final String INTENT_IMAGE_URI = "IMAGE_URI";
+    public static final String INTENT_DESCRIPTION = "DESCRIPTION";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        final String INTENT_IMAGE_URI = "IMAGE_URI";
-        final String INTENT_DESCRIPTION = "DESCRIPTION";
 
         setContentView(R.layout.activity_actor_detail);
         ImageView avatar = findViewById(R.id.big_avatar);
