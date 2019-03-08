@@ -20,16 +20,22 @@ public class GalleryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery);
         RecyclerView previewImages = findViewById(R.id.previewImages);
-        previewImages.addItemDecoration(new SpacesItemDecoration(getResources().getDimensionPixelSize(R.dimen.default_separator_line)));
-        previewImages.setLayoutManager(new GridLayoutManager(this, getResources().getInteger(R.integer.rows)));
+        final int WIDTH = getWindowManager().getDefaultDisplay().getWidth()/ getResources().
+                getInteger(R.integer.rows);
+        previewImages.addItemDecoration(new SpacesItemDecoration(getResources().
+                getDimensionPixelSize(R.dimen.default_separator_line)));
+        previewImages.setLayoutManager(new GridLayoutManager(this, getResources().
+                getInteger(R.integer.rows)));
 
-        RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(actors, this);
+        RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(actors, this, WIDTH);
         recyclerViewAdapter.setOnItemClickListener(new RecyclerViewAdapter.OnItemClickListener<Actor>() {
             @Override
             public void onItemClicked(int position, Actor item) {
                 Intent intent = new Intent(getApplicationContext(), ActorDetailActivity.class);
-                intent.putExtra(ActorDetailActivity.INTENT_IMAGE_URI, actors.get(position).getLargeImage());
-                intent.putExtra(ActorDetailActivity.INTENT_DESCRIPTION, actors.get(position).getDescription());
+                intent.putExtra(ActorDetailActivity.INTENT_IMAGE_URI, actors.get(position).
+                        getLargeImage());
+                intent.putExtra(ActorDetailActivity.INTENT_DESCRIPTION, actors.get(position).
+                        getDescription());
                 startActivity(intent);
             }
         });

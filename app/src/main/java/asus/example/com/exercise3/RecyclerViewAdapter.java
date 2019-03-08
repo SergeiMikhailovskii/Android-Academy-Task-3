@@ -19,11 +19,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private final LayoutInflater inflater;
     private final Context context;
     private OnItemClickListener<Actor> onItemClickListener;
+    private static int width;
 
-    RecyclerViewAdapter(List<Actor> actors, Context context){
+
+    RecyclerViewAdapter(List<Actor> actors, Context context, int width){
         this.context = context;
         this.actors = actors;
         inflater = LayoutInflater.from(context);
+        RecyclerViewAdapter.width = width;
+    }
+
+    public static int getWidth(){
+        return width;
     }
 
 
@@ -81,7 +88,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         ViewHolder(@NonNull View itemView) {
             super(itemView);
             avatar = itemView.findViewById(R.id.avatar);
-
+            avatar.setMaxWidth(width);
         }
 
 
