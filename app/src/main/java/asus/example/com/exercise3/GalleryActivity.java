@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 
@@ -20,14 +21,16 @@ public class GalleryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery);
         RecyclerView previewImages = findViewById(R.id.previewImages);
-        final int WIDTH = getWindowManager().getDefaultDisplay().getWidth()/ getResources().
-                getInteger(R.integer.rows);
+        final int width = (int) (getWindowManager().getDefaultDisplay().getWidth()/ getResources().
+                getInteger(R.integer.rows)-2*getResources().
+                getDimensionPixelSize(R.dimen.default_separator_line));
+        final int height = width;
         previewImages.addItemDecoration(new SpacesItemDecoration(getResources().
-                getDimensionPixelSize(R.dimen.default_separator_line)));
+                getDimensionPixelSize(R.dimen.default_separator_line), getApplicationContext()));
         previewImages.setLayoutManager(new GridLayoutManager(this, getResources().
                 getInteger(R.integer.rows)));
 
-        RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(actors, this, WIDTH);
+        RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(actors, this, width, height);
         recyclerViewAdapter.setOnItemClickListener(new RecyclerViewAdapter.OnItemClickListener<Actor>() {
             @Override
             public void onItemClicked(int position, Actor item) {

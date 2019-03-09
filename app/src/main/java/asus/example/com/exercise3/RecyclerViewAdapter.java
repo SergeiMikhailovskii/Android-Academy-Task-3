@@ -19,26 +19,23 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private final LayoutInflater inflater;
     private final Context context;
     private OnItemClickListener<Actor> onItemClickListener;
-    private static int width;
+    private int width;
+    private int height;
 
 
-    RecyclerViewAdapter(List<Actor> actors, Context context, int width){
+    RecyclerViewAdapter(List<Actor> actors, Context context, int width, int height){
         this.context = context;
         this.actors = actors;
-        inflater = LayoutInflater.from(context);
-        RecyclerViewAdapter.width = width;
+        this.inflater = LayoutInflater.from(context);
+        this.width = width;
+        this.height = height;
     }
-
-    public static int getWidth(){
-        return width;
-    }
-
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull final ViewGroup viewGroup, int i) {
         View itemView = inflater.inflate(R.layout.preview_image_layout, viewGroup, false);
-        final ViewHolder viewHolder = new ViewHolder(itemView);
+        final ViewHolder viewHolder = new ViewHolder(itemView, width, height);
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,10 +82,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         public final ImageView avatar;
 
-        ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView, int width, int height) {
             super(itemView);
             avatar = itemView.findViewById(R.id.avatar);
-            avatar.setMaxWidth(width);
+            ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(width, height);
+            avatar.setLayoutParams(layoutParams);
         }
 
 
