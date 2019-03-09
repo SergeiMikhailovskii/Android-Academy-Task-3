@@ -85,8 +85,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         ViewHolder(@NonNull View itemView, int width, int height) {
             super(itemView);
             avatar = itemView.findViewById(R.id.avatar);
-            ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(width, height);
-            avatar.setLayoutParams(layoutParams);
+            ViewGroup.LayoutParams layoutParams = avatar.getLayoutParams();
+            layoutParams.width = width;
+            layoutParams.height = height;
         }
 
 

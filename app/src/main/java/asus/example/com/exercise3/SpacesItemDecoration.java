@@ -1,7 +1,6 @@
 package asus.example.com.exercise3;
 
 import android.content.Context;
-import android.content.res.Configuration;
 import android.graphics.Rect;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -20,18 +19,8 @@ public class SpacesItemDecoration extends RecyclerView.ItemDecoration {
     public void getItemOffsets(@NonNull Rect outRec, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state){
         outRec.left = space;
         outRec.bottom = space;
-        if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
-            if (parent.getChildAdapterPosition(view) == 0 || parent.getChildAdapterPosition(view) == 1){
-                outRec.top = space;
-            }
-        }
-        else if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
-            if (parent.getChildAdapterPosition(view) == 0
-                    || parent.getChildAdapterPosition(view) == 1
-                    || parent.getChildAdapterPosition(view) == 2
-                    || parent.getChildAdapterPosition(view) == 3){
-                outRec.top = space;
-            }
+        if (parent.getChildAdapterPosition(view)>=0 && parent.getChildAdapterPosition(view)<context.getResources().getInteger(R.integer.rows)){
+            outRec.top = space;
         }
     }
 }
